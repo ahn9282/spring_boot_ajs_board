@@ -1,21 +1,17 @@
-package edu.sejong.ex.mapper;
+package edu.sejong.ex.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Service;
 
 import edu.sejong.ex.vo.BoardVO;
+@Service
+public interface BoardService  {
 
-@Mapper
-public interface BoardMapper {
-	
 	List<BoardVO> boardList();
-	void addBoard(BoardVO board);
+	void registerBoard(BoardVO board);
 	void deleteBoard(BoardVO board);
 	BoardVO viewBoard(BoardVO board);
 	void modifyBoard(BoardVO board);
-	void upHit(BoardVO board);
 	void replyBoard(BoardVO board);
-	void replySort(BoardVO board);
-	
 }
