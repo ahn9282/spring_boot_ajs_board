@@ -26,7 +26,7 @@ WHERE row_num BETWEEN #{startNum} AND #{endNum}
        values (mvc_board_seq.nextval, #{bname} , #{btitle}, #{bcontent}, 0, mvc_board_seq.currval, 0, 0)
         ]]>
 	</select>
-
+ 
 	<select id="deleteBoard"
 		parameterType="edu.sejong.ex.vo.BoardVO">
     <![CDATA[
