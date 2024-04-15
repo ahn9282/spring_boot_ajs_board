@@ -8,6 +8,7 @@ import edu.sejong.ex.vo.BoardVO;
 @Service
 public interface BoardService  {
 
+	List<BoardVO> boardListPage(int startNum, int endNum);
 	List<BoardVO> boardList();
 	void registerBoard(BoardVO board);
 	void deleteBoard(BoardVO board);

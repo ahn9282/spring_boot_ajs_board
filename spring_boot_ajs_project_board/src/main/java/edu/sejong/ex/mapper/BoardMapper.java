@@ -9,6 +9,7 @@ import edu.sejong.ex.vo.BoardVO;
 @Mapper
 public interface BoardMapper {
 	
+	List<BoardVO> boardListPage(int startNum, int endNum);
 	List<BoardVO> boardList();
 	void addBoard(BoardVO board);
 	void deleteBoard(BoardVO board);

@@ -24,8 +24,8 @@
 	<form action="${pageContext.request.contextPath }/board/modify" method = "post">
 	<input type="hidden" name="bid" value="${board.bid}">
 	글 제목 : <input type="text" name="btitle" value="${board.btitle}" ><br>
-	작성자 : <input type="text" name="bname" value="${board.btitle}" ><br>
-	글 내용 : <textarea name="bcontent" > ${board.btitle}</textarea><br>
+	작성자 : <input type="text" name="bname" value="${board.bname}" ><br>
+	글 내용 : <textarea name="bcontent" > ${board.bcontent}</textarea><br>
 	 <p>조회수 :  ${board.bhit}</p>
 
 	<br>
@@ -37,9 +37,7 @@
 	<input type="hidden" name="bgroup" value="${board.bgroup }">
 	<input type="hidden" name="bstep" value="${board.bstep +1}">
 	<input type="hidden" name="bindent" value="${board.bindent +1}">
-	비그룹 : ${board.bgroup }
-	비 스텝 : ${board.bstep }
-	비 인덴트 : ${board.bindent }
+
 	<button type="submit" >댓글달기</button>
 	</form>
 	

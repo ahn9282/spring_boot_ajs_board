@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 
 import edu.sejong.ex.mapper.BoardMapper;
 import edu.sejong.ex.vo.BoardVO;
+
 @Service
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 
 	@Override
-	public List<BoardVO> boardList() {
-		List<BoardVO> boards = boardMapper.boardList();
+	public List<BoardVO> boardListPage(int startNum, int endNum) {
+		List<BoardVO> boards = boardMapper.boardListPage(startNum, endNum);
+		System.out.println(startNum);
+		System.out.println(endNum);
 		return boards;
 	}
 
@@ -22,13 +25,13 @@ public class BoardServiceImpl implements BoardService{
 	public void registerBoard(BoardVO board) {
 		// TODO Auto-generated method stub
 		boardMapper.addBoard(board);
-		
+
 	}
 
 	@Override
 	public void deleteBoard(BoardVO board) {
-	boardMapper.deleteBoard(board);
-		
+		boardMapper.deleteBoard(board);
+
 	}
 
 	@Override
@@ -47,9 +50,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void replyBoard(BoardVO board) {
 
-boardMapper.replyBoard(board);
-boardMapper.replySort(board);
-		
+		boardMapper.replyBoard(board);
+		boardMapper.replySort(board);
+
+	}
+
+	@Override
+	public List<BoardVO> boardList() {
+		List<BoardVO> boards = boardMapper.boardList();
+		return boards;
 	}
 
 }
