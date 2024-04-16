@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.sejong.ex.page.Criteria;
 import edu.sejong.ex.vo.BoardVO;
 
 @Mapper
@@ -18,5 +19,8 @@ public interface BoardMapper {
 	void upHit(BoardVO board);
 	void replyBoard(BoardVO board);
 	void replySort(BoardVO board);
+	List<BoardVO> getListWithPaging(Criteria cri);
+	int getToatalCount();
+	
 	
 }

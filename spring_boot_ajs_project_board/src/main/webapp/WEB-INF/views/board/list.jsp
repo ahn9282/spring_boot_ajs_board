@@ -31,7 +31,8 @@ td, th {
 
 </head>
 <body>
-<%int count =0; %>
+<%int count =0; 
+int pageCount = 1;%>
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -70,7 +71,12 @@ td, th {
 		
 		<div id="page" class="d-flex flex-row justify-content-center" style=" border:1px solid red; width:40%">
 			<c:if test="${boardsLength > 5}">
-				<c:forEach begin="1" end="${boardsLength/5 + 1}">
+			
+			<form action="${pageContext.request.contextPath }/board/list?" method="get">
+			<button ><<</button>
+			</form>
+			
+				<c:forEach begin="1" end="10">
 					<form action="${pageContext.request.contextPath }/board/list" method="get">
 					<input type="hidden" name="startNum" value="<%=count*5 + 1%>">
 					<input type="hidden" name="endNum" value="<%=count*5 + 5%>">
@@ -78,6 +84,9 @@ td, th {
 					</form>
 					<%count++; %>
 				</c:forEach>
+				<form action="${pageContext.request.contextPath }/board/list?" method="get">
+			<button >>></button>
+			</form>
 			</c:if>
 		</div>
 </body>
