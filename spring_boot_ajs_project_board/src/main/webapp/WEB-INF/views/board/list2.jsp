@@ -42,23 +42,25 @@ td, th {
 	margin-bottom: 3%;
 }
 
-#page a {
+/* #page a {
 	border: 1px solid #aaaaaa;
 	width: 3em;
 	height: 3em;
 	margin: 0;
-	  text-decoration: none;
+	text-decoration: none;
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	align-items: center; 
+	align-items: center;
 }
-#page-a1{
-border-radius: 10px 0 0 10px;
+
+#page-a1 {
+	border-radius: 10px 0 0 10px;
 }
-#page-a2{
-border-radius:0  10px 10px 0;
-}
+
+#page-a2 {
+	border-radius: 0 10px 10px 0;
+} */
 </style>
 
 </head>
@@ -94,24 +96,41 @@ border-radius:0  10px 10px 0;
 						</tr>
 					</c:forEach>
 				</table>
-				<div id="page" class="d-flex flex-row justify-content-center align-items-center">
-					<c:if test="${pageMaker.prev}">
-						<a id="page-a1" href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }" >
-							<< </a>
-					</c:if>
+				<div id="page"
+					class="d-flex flex-row justify-content-center align-items-center">
+					<nav aria-label="Search results pages">
+						<ul class="pagination">
 
-					<c:forEach var="idx" begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}">
-						<a href="list2${pageMaker.makeQuery(idx)}">${idx}</a>
-					</c:forEach>
+							<c:if test="${pageMaker.prev}">
+								<li class="page-item" ><a id="page-a1" class="page-link"
+									href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">
+										<< </a></li>
+							</c:if>
+
+							<c:forEach var="idx" begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}">
+								<c:if test="${idx == pageMaker.criteria.pageNum }">
+								<li class="page-item active" >
+								</c:if>
+								<c:if test="${idx != pageMaker.criteria.pageNum }">
+								<li class="page-item" >
+								</c:if>
+								<a class="page-link"
+									href="list2${pageMaker.makeQuery(idx)}">${idx}</a>
+									</li>
+							</c:forEach>
 
 
-					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<a id="page-a2" href="list2${pageMaker.makeQuery(pageMaker.endPage + 1) }">
-							>> </a>
-					</c:if>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li class="page-item"><a class="page-link" id="page-a2"
+									href="list2${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+										>> </a></li>
+							</c:if>
+
+						</ul>
+					</nav>
 				</div>
-				
+
 			</div>
 			<div class="card=footer w-100 m-3" id="card-content"
 				style="border-top: 1px solid #aaaaaa;">
