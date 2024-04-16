@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import edu.sejong.ex.page.Criteria;
 import edu.sejong.ex.vo.BoardVO;
 @Service
 public interface BoardService  {
@@ -15,4 +16,8 @@ public interface BoardService  {
 	BoardVO viewBoard(BoardVO board);
 	void modifyBoard(BoardVO board);
 	void replyBoard(BoardVO board);
+	
+	//페이징 처리 함수
+	int getTotal();
+	List<BoardVO> getListWithPaging(Criteria cri);
 }

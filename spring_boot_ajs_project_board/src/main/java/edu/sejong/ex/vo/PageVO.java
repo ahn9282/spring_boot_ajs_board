@@ -16,7 +16,7 @@ public class PageVO {
 	private int startPage;
 	private int endPage;
 
-	private boolean pre, next;
+	private boolean prev, next;
 	private int totoal;
 	private Criteria criteria;
 
@@ -36,7 +36,7 @@ public class PageVO {
 
 		}
 
-		this.pre = this.startPage > 1;
+		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
 
 	}

@@ -64,7 +64,7 @@ WHERE row_num BETWEEN #{startNum} AND #{endNum}
         ]]>
 	</select>
 
-	<select id="getTotalCount" resultType="int">
+	<select id="getToatalCount" resultType="int">
 	   <![CDATA[
 	   select count(bid) from mvc_board
 	 ]]>

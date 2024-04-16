@@ -33,6 +33,6 @@ public class BoardVO  {
 	private int bgroup;
 	private int bstep;
 	private int bindent;
-	private int row_num;
+	private int rnum;
 
 }

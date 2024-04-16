@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.sejong.ex.page.Criteria;
 import edu.sejong.ex.service.BoardService;
 import edu.sejong.ex.vo.BoardVO;
+import edu.sejong.ex.vo.PageVO;
+import lombok.extern.slf4j.Slf4j;
 
 
-
+@Slf4j
 @Controller
 @RequestMapping("/board")
 public class BoardController  {
@@ -35,6 +38,19 @@ public class BoardController  {
 		model.addAttribute("boardsLength",boardService.boardList().size());
 		return"/board/list";
 	}
+	@GetMapping("/list2")
+	public String boardList2(Criteria criteria,Model model) {
+		log.info("boardLsit2()..");
+	
+		
+		model.addAttribute("boards",boardService.getListWithPaging(criteria));
+		int total = boardService.getTotal();
+		model.addAttribute("pageMaker",new PageVO(criteria, total));
+		
+		
+		return"/board/list2";
+	}
+	
 //	@PostMapping("/list")
 //	public String boardListPage(Model model,@RequestParam(value = "StartNum", required = false)int StartNum, @RequestParam(value = "endNum", required = false)int endNum) {
 //		model.addAttribute("boards",boardService.boardListPage(StartNum,endNum));
