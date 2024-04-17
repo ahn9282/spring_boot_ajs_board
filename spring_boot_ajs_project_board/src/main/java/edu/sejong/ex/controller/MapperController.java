@@ -29,4 +29,4 @@ public class MapperController  {
 		return "mapper/listSal";
 	}
 
-}
+} 
