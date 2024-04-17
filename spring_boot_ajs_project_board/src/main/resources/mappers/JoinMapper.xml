@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.sejong.ex.mapper.JoinMapper">
+
+    <resultMap type="edu.sejong.ex.vo.DeptVO" id="Dept">
+        <result column="deptno" property="deptno" />
+        <result column="dname" property="dname" />
+    </resultMap>
+
+    <resultMap type="edu.sejong.ex.vo.EmpVO" id="Emp">
+        <result column="empno" property="empno" />
+        <result column="ename" property="ename" />
+        <result column="sal" property="sal" />
+        <result column="job" property="job" />
+        <collection property="deptVO" resultMap="Dept"/>
+    </resultMap>
+    
+   
+    
+    <select id="selectJoinList" resultMap="Emp">
+        <![CDATA[
+            select e.empno, e.ename, e.sal, e.job, d.deptno, d.dname from emp e, dept d where d.deptno = e.deptno order by d.deptno asc,e.empno asc
+        ]]>
+    </select>
+    
+       <resultMap type="edu.sejong.ex.vo.SalGradeVO" id="SalG">
+        <result column="grade" property="grade" />
+        <result column="losal" property="losal" />
+        <result column="hisal" property="hisal" />
+    </resultMap>
+
+    <resultMap type="edu.sejong.ex.vo.EmpSalVO" id="EmpSal">
+        <result column="ename" property="ename" />
+        <result column="sal" property="sal" />
+        <result column="job" property="job" />
+        <collection property="salGradeVO" resultMap="SalG"/>
+    </resultMap>
+    
+    
+    <select id="selectSalList" resultMap="EmpSal">
+        <![CDATA[
+            select e.ename, e.sal, e.job,s.grade from emp e, salgrade s where e.sal between s.losal and s.hisal
+        ]]>
+    </select>
+    
+</mapper>
+
+ 
