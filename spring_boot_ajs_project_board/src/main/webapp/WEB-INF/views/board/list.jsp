@@ -31,7 +31,7 @@ td, th {
 
 </head>
 <body>
-<%int count =0; 
+<%int count =1; 
 int pageCount = 1;%>
 	<table border="1">
 		<tr>
@@ -47,7 +47,7 @@ int pageCount = 1;%>
 		%>
 		<c:forEach var="board" items="${boards}">
 			<tr>
-				<td>${board.row_num}</td>
+				<td><%=count%></td>
 				<td><c:forEach begin="1" end="${board.bindent}">[Re]</c:forEach>
 					<a
 					href="${pageContext.request.contextPath }/board/view?bid=${board.bid}">${board.btitle}</a></td>
@@ -59,7 +59,7 @@ int pageCount = 1;%>
 					class="btn " type="submit">삭제</a></td>
 			</tr>
 			<%
-				l++;
+				count++;
 			%>
 		</c:forEach>
 	</table>
