@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.sejong.ex.mapper.UserMapper">
+
+    <resultMap type="edu.sejong.ex.vo.AuthVO" id="AuthMap">
+        <result column="authority" property="authority" />
+    </resultMap>
+
+    <resultMap type="edu.sejong.ex.vo.UserVO" id="UserMap">
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="enabled" property="enabled" />
+        <collection property="authList" resultMap="AuthMap"/>
+    </resultMap>
+    
+   
+    
+    <select id="getUser" parameterType="String" resultMap="UserMap">
+        <![CDATA[
+        select u.username, u.password, u.enabled, a.authority from users u, authorities a 
+        where u.username = a.username and u.username =#{username}
+        ]]>
+    </select>
+    
+    
+    <select id="insertUser" parameterType="edu.sejong.ex.vo.UserVO" resultType="int" >
+        <![CDATA[
+        insert into users(username,password) values (#{username},#{password})
+        ]]>
+    </select>
+    <select id="insertAuthorities" parameterType="edu.sejong.ex.vo.UserVO" >
+        <![CDATA[
+     insert into AUTHORITIES (username,AUTHORITY) values(#{username},'ROLE_USER')
+        ]]>
+    </select>
+    
+      
+    
+</mapper>
+
+ 

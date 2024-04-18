@@ -34,13 +34,14 @@
         <result column="ename" property="ename" />
         <result column="sal" property="sal" />
         <result column="job" property="job" />
+        <result column="deptno" property="deptno" />
         <collection property="salGradeVO" resultMap="SalG"/>
     </resultMap>
     
     
     <select id="selectSalList" resultMap="EmpSal">
         <![CDATA[
-            select e.ename, e.sal, e.job,s.grade from emp e, salgrade s where e.sal between s.losal and s.hisal
+            select e.ename, e.sal, e.job,s.grade, e.deptno from emp e, salgrade s where e.sal between s.losal and s.hisal
         ]]>
     </select>
     

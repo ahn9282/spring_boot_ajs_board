@@ -51,7 +51,7 @@ class JoinMapperTest {
 	void test2() {
 		List<EmpSalVO> list = joinMapper.selectSalList();
 		for(EmpSalVO e : list) {
-			System.out.println(e);
+			log.info("부서 번호 = {}",e.getDeptno());
 		}
 		List<EmpSalVO> list1 = empService.empSalList();
 		for(EmpSalVO e : list1) {
