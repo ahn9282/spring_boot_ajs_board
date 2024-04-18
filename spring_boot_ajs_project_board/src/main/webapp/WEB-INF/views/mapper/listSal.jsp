@@ -35,28 +35,25 @@ td, th {
 int pageCount = 1;%>
 	<table border="1">
 		<tr>
-			<th>번호</th>
-			<th>글 제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회 수</th>
+		<th>번호</th>
+			<th>사원 이름</th>
+			<th>급여</th>
+			<th>직책</th>
+			<th>급여 등급</th>
 
 		</tr>
 		<%
 			int l = 1 + count * 5;
 		%>
-		<c:forEach var="board" items="${boards}">
+		<c:forEach var="board" items="${emps}">
 			<tr>
 				<td><%=count%></td>
-				<td><c:forEach begin="1" end="${board.bindent}">[Re]</c:forEach>
-					<a
-					href="${pageContext.request.contextPath }/board/view?bid=${board.bid}">${board.btitle}</a></td>
-				<td>${board.bname}</td>
-				<td>${board.bdate}</td>
-				<td>${board.bhit}</td>
-				<td><a
-					href="${pageContext.request.contextPath }/board/delete?bid=${board.bid}"
-					class="btn " type="submit">삭제</a></td>
+			
+				<td>${board.ename}</td>
+				<td>${board.sal}</td>
+				<td>${board.job}</td>
+				<td>${board.salGradeVO.grade}</td>
+			
 			</tr>
 			<%
 				count++;
