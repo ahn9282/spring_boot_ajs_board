@@ -17,12 +17,12 @@ public class PageVO {
 	private int endPage;
 
 	private boolean prev, next;
-	private int totoal;
+	private int total;
 	private Criteria criteria;
 
 	public PageVO(Criteria criteria, int total) {
 		this.criteria = criteria;
-		this.totoal = total;
+		this.total = total;
 
 		this.endPage = (int) (Math.ceil(criteria.getPageNum() / 10.0)) * 10;
 		this.startPage = this.endPage - 9;
