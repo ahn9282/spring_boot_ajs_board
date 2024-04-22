@@ -3,6 +3,7 @@ package edu.sejong.ex.config;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,12 +25,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 테스토용 유저 만들기(인메모리 방식)
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//{noop}는 암호화를 거치지 않는다.
-		//.roles()는 권한
-		auth.inMemoryAuthentication().withUser("member").password("{noop}member").roles("USER")
-		.and()
-		.withUser("admin").password("{noop}admin").roles("ADMIN");
+		// {noop}는 암호화를 거치지 않는다.
+		// .roles()는 권한
+		auth.inMemoryAuthentication().withUser("member").password("{noop}member").roles("USER").and().withUser("admin")
+				.password("{noop}admin").roles("ADMIN");
 
 	}
+
+	
+	  @Override public void configure(HttpSecurity http) throws Exception {
+	  
+	  //우선 csrf설정을 해제 //초기 개발 시만 해주는게 좋다. http.csrf().disable();
+	  //권한 설정 -> user와 admin의 권한을 가진 경우 모든 요청을 허가한다. 
+		  http.authorizeHttpRequests()
+	  .antMatchers("/user/**").hasAnyRole("USER")
+	  .antMatchers("/admin/**").hasAnyRole("ADMIN")
+	  .antMatchers("/**").permitAll();
+	  
+	  http.formLogin();//스프링 시큐리티에 있는 기본 로그인 폼을 사용하겠다. 
+	  }
+	 
+	/*
+	 * @Override public void configure(HttpSecurity http) throws Exception {
+	 * 
+	 * //ADMIN만 /mapper/empList에 엑세스할 수 있도록 권한 설정 http.csrf().disable();
+	 * 
+	 * 
+	 * http.authorizeHttpRequests()
+	 * .antMatchers("/mapper/empList").hasAnyRole("ADMIN");
+	 * 
+	 * http.formLogin(); }
+	 */
 
 }

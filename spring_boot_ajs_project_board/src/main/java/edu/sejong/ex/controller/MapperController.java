@@ -17,6 +17,14 @@ public class MapperController  {
 	
 	@Autowired
 	EmpService empService;
+	
+	@GetMapping("/")
+	public String home(Model model) {
+		log.info("home()..");
+		
+		return "home";
+	}
+	
 
 	@GetMapping("/empList")
 	public String empJoinList(Model model) {
