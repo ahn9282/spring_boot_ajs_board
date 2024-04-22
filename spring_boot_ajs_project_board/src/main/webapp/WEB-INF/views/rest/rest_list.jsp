@@ -15,7 +15,10 @@
 					crossorigin="anonymous">
 
 					</script>
+					
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+				<script src="/js/board.js"></script>
+				
 				<script type="text/javascript">
 					/*
 					 $.ajax({
@@ -32,6 +35,7 @@
 					 */
 
 					$(document).ready(function () {
+						boardService.test();
 						function boardList() {
 							$.ajax({
 								type: "GET",
@@ -79,7 +83,7 @@
 						}
 						
 
-						function getBoard(id) {
+						/* function getBoard(id) {
 							$.ajax({
 								type: "GET",
 								url: "${pageContext.request.contextPath}/boards/list/" + id,
@@ -91,9 +95,9 @@
 								}
 							});
 
-						}
+						} */
 
-						function deleteBoard(id,pageNum,amount) {
+						/* function deleteBoard(id,pageNum,amount) {
 							$.ajax({
 								type: "DELETE",
 								url: "${pageContext.request.contextPath}/boards/list/" + id,
@@ -106,7 +110,7 @@
 									console.log(e);
 								}
 							});
-						}
+						} */
 
 						function writeBoard(board) {
 							$.ajax({
@@ -152,7 +156,7 @@
 
 						}
 
-						function pageBoard(pageNum,amount) {
+						/* function pageBoard(pageNum,amount) {
 							$.ajax({
 								type: "get",
 								url: "${pageContext.request.contextPath}/boards/list/page",
@@ -183,8 +187,8 @@
 									console.log(e);
 								}
 							})
-						};
-						function boardListPaging(pageNum,amount) {
+						}; */
+						/* function boardListPaging(pageNum,amount) {
 							$.ajax({
 								type: "GET",
 								url: "${pageContext.request.contextPath}/boards/list/paging",
@@ -230,14 +234,13 @@
 								}
 							});
 
-						}
+						} */
 
 						//writeBoard(board);
 						//modifyBoard(board1);
 
-						boardListPaging();
-						
-
+						boardService.pagingList();
+	
 						//getBoard(123);
 						//deleteBoard(2w52);
 
