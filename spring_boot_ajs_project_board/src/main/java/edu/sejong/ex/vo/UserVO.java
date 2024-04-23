@@ -20,11 +20,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class UserVO {
 
-private String username;
-private String password;
-private int enabled;
-private List<AuthVO> authList;
+	private String username;
+	private String password;
+	private String enabled;
+	private List<AuthVO> authList;
 
 }

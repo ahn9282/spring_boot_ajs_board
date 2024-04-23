@@ -7,7 +7,7 @@
 <title>Admin HOme</title>
 </head>
 <body>
-<h1>관리자 페이지 입니다.</h1>
+<h1>사용자 페이지 입니다.</h1>
 
 <h3>[<a href="<c:url value="/" />">홈</a>]</h3>
 </body>
