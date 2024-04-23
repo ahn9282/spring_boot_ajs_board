@@ -41,7 +41,7 @@ class UserMapperTest {
 			log.info("{}", s);
 		}
 	}
-	@Disabled
+	//@Disabled
 	@Test
 	void testInsertUser() {
 		UserVO user = new UserVO();
