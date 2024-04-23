@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  //권한 설정 -> user와 admin의 권한을 가진 경우 모든 요청을 허가한다. 
 		  http.authorizeHttpRequests()
 	  .antMatchers("/user/**").hasAnyRole("USER")
-	  .antMatchers("/admin/**").hasAnyRole("ADMIN")
+	  .antMatchers("/board/**").hasAnyRole("ADMIN")
 	  .antMatchers("/**").permitAll();
 	  
 	  http.formLogin();//스프링 시큐리티에 있는 기본 로그인 폼을 사용하겠다. 
