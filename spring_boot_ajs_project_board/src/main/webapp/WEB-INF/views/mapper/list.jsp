@@ -85,7 +85,7 @@ int pageCount = 1;%>
 					</form>
 					<%count++; %>
 				</c:forEach>
-				<form action="${pageContext.request.contextPath }/board/list?" method="get">
+				<form action="${pageContext.request.contextPath }/mapper/emplist?" method="get">
 			<button >>></button>
 			</form>
 			</c:if>
