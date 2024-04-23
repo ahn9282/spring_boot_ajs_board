@@ -33,16 +33,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	
-	  @Override public void configure(HttpSecurity http) throws Exception {
+	  @Override 
+	  public void configure(HttpSecurity http) throws Exception {
 	  
-	  //우선 csrf설정을 해제 //초기 개발 시만 해주는게 좋다. http.csrf().disable();
-	  //권한 설정 -> user와 admin의 권한을 가진 경우 모든 요청을 허가한다. 
-		  http.authorizeHttpRequests()
+	  //우선 csrf설정을 해제 //초기 개발 시만 해주는게 좋다. 
+		  http.csrf().disable();
+		  http.authorizeRequests()
 	  .antMatchers("/user/**").hasAnyRole("USER")
 	  .antMatchers("/board/**").hasAnyRole("ADMIN")
 	  .antMatchers("/**").permitAll();
-	  
-	  http.formLogin();//스프링 시큐리티에 있는 기본 로그인 폼을 사용하겠다. 
+	  http
+	  .formLogin()
+	  			.loginPage("/login")
+	  			.usernameParameter("id")
+	  			.passwordParameter("pw")
+	  			.defaultSuccessUrl("/")
+	  			.permitAll();
+	  //모든 유저가 로그인 화면은 엑세스가 가능하다.
 	  }
 	 
 	/*
@@ -51,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * //ADMIN만 /mapper/empList에 엑세스할 수 있도록 권한 설정 http.csrf().disable();
 	 * 
 	 * 
-	 * http.authorizeHttpRequests()
+	 * http.authorizeRequests()
 	 * .antMatchers("/mapper/empList").hasAnyRole("ADMIN");
 	 * 
 	 * http.formLogin(); }
