@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User HOme</title>
+<title>Admin HOme</title>
 </head>
 <body>
-<h1>유저 페이지 입니다.</h1>
+<h1>운영자 페이지 입니다.</h1>
 
 <!-- <p>principal: <sec:authentication property="principal"/></p> -->
 
