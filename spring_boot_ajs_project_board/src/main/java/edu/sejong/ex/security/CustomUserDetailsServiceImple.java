@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import edu.sejong.ex.mapper.JoinMapper;
 import edu.sejong.ex.mapper.UserMapper;
+import edu.sejong.ex.vo.EmpVO;
 import edu.sejong.ex.vo.UserDetailsVO;
 import edu.sejong.ex.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,8 @@ public class CustomUserDetailsServiceImple implements UserDetailsService{
 	@Autowired
 	private UserMapper userMapper;
 	
+	@Autowired
+	private JoinMapper JoinMapper;
 	
 	
 	@Override
@@ -31,9 +35,11 @@ public class CustomUserDetailsServiceImple implements UserDetailsService{
 		
 		UserVO user = userMapper.getUser(username);
 		
+		EmpVO empVO = JoinMapper.getEmpVO("KING");
+		
 		log.warn("queried by UserVO mapper : {}", user);
 
-		return user==null?null:new UserDetailsVO(user);
+		return user==null?null:new UserDetailsVO(user, empVO);
 		
 	}
 	
