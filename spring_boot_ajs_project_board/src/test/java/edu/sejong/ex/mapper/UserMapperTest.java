@@ -48,7 +48,10 @@ class UserMapperTest {
 		}
 	}
 
+
+
 	@Disabled
+
 	@Test
 	void testInsertUser() {
 		UserVO user = new UserVO();
