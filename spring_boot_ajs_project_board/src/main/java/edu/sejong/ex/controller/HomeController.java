@@ -22,6 +22,12 @@ public class HomeController {
 		log.info("adminHome()..");
 
 	}
+	
+	@GetMapping("/loginEmp")
+	public void loginEmp() {
+		log.info("loginEmp()..");
+		
+	}
 
 	/*
 	 * @GetMapping("/login") public String login(Model model) {

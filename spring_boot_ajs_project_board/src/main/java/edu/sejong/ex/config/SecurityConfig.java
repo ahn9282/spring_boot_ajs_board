@@ -1,6 +1,7 @@
 package edu.sejong.ex.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import edu.sejong.ex.security.CustomNoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록됨
@@ -27,9 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 무시할 정적 리소스의 파일들을 지정하여 무시하도록 설정
 	}
 
+	
+	  // 테스토용 유저 만들기(인메모리 방식)
+	  
 	/*
-	 * // 테스토용 유저 만들기(인메모리 방식)
-	 * 
 	 * @Override public void configure(AuthenticationManagerBuilder auth) throws
 	 * Exception { // {noop}는 암호화를 거치지 않는다. // .roles()는 권한
 	 * auth.inMemoryAuthentication().withUser("member").password("{noop}member").
@@ -38,15 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 
 	 * }
 	 */
+	 
 	
 	
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-	
-		auth.userDetailsService(CustomUserDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder());
-
-	}
+	@Override public void configure(AuthenticationManagerBuilder auth) throws
+	  Exception {
+	  
+	  auth.userDetailsService(CustomUserDetailsService) .passwordEncoder(customNoOpPasswordEncoder());
+	  
+	 }
+	 
 	
 	  @Override 
 	  public void configure(HttpSecurity http) throws Exception {
@@ -66,12 +72,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  			.loginPage("/login")
 	  			.usernameParameter("id")
 	  			.passwordParameter("pw")
-	  			.defaultSuccessUrl("/")
+	  			.defaultSuccessUrl("/loginEmp")
 	  			.permitAll();
 	  			
 
 
 	  //모든 유저가 로그인 화면은 엑세스가 가능하다.
+	  }
+	  
+	  
+	  @Bean
+	  public PasswordEncoder passwordEncoder() {
+		  return new BCryptPasswordEncoder();
+	  }
+	  
+	  @Bean
+	  public PasswordEncoder customNoOpPasswordEncoder() {
+		  return new CustomNoOpPasswordEncoder();
 	  }
 	 
 	/*
