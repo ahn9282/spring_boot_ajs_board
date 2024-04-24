@@ -55,21 +55,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		  http.csrf().disable();
 		  
 		  http.authorizeRequests()
-	  .antMatchers("/user/userHome").hasAnyRole("USER")
-	  .antMatchers("/admin/adminHome").hasAnyRole("ADMIN")
-	  
+	  .antMatchers("/**").hasAnyRole("USER")
+	  .antMatchers("/**").hasAnyRole("ADMIN")
+	  .antMatchers("/**").permitAll()
 	  .anyRequest().authenticated();
 	  
 	  
 	  http
 	  .formLogin()
-	  			.loginPage("/shopper/login")
+	  			.loginPage("/login")
 	  			.usernameParameter("id")
 	  			.passwordParameter("pw")
-	  			.defaultSuccessUrl("/")
+	  			.defaultSuccessUrl("/home")
 	  			.permitAll();
 	  			
-	  
+
+
 	  //모든 유저가 로그인 화면은 엑세스가 가능하다.
 	  }
 	 
