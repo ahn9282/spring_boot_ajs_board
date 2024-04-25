@@ -18,23 +18,30 @@ public class EmpUserDetailsVO implements UserDetails {
 	private String username;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
+	private EmpVO emp;
 	
 	
 	 public EmpUserDetailsVO(EmpVO emp) {
 		this.setUsername(emp.getEname());
 		this.setPassword(String.valueOf(emp.getEmpno()));
-		this.setAuthorities("ROLE_USER");
+		//this.setAuthorities("ROLE_USER");
+		this.setEmp(emp);
 	}
 	
-	
-	public void setAuthorities(String authString) {
-		
-		this.authorities = null;
+//	
+//	public void setAuthorities(String authString) {
+//		
+//		this.authorities;
+//	}
+	  public EmpVO getEmp() {
+		return emp;
 	}
-	 
 	   @Override
 	   public Collection<? extends GrantedAuthority> getAuthorities() {
-	      return null;
+		   List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		   authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		   		
+	      return authorities;
 	   }
 
 	   @Override

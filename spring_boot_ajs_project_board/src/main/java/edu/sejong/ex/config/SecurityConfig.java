@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import edu.sejong.ex.security.CustomNoOpPasswordEncoder;
 
@@ -49,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override public void configure(AuthenticationManagerBuilder auth) throws
 	  Exception {
 	  
-	  auth.userDetailsService(CustomUserDetailsService) .passwordEncoder(customNoOpPasswordEncoder());
+	  auth.userDetailsService(CustomUserDetailsService) .passwordEncoder(passwordEncoder());
 	  
 	 }
 	 
@@ -58,13 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  public void configure(HttpSecurity http) throws Exception {
 	  
 	  //우선 csrf설정을 해제 //초기 개발 시만 해주는게 좋다. 
-		  http.csrf().disable();
+		  //http.csrf().disable();
 		  
 		  http.authorizeRequests()
 	  .antMatchers("/user/userHome").hasAnyRole("USER")
 	  .antMatchers("/admin/adminHome").hasAnyRole("ADMIN")
 	  .antMatchers("/**").permitAll()
-	  .anyRequest().authenticated();
+	  .anyRequest().authenticated()
+	  .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	  
 	  
 	  http
@@ -72,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  			.loginPage("/login")
 	  			.usernameParameter("id")
 	  			.passwordParameter("pw")
-	  			.defaultSuccessUrl("/loginEmp")
+	  			.defaultSuccessUrl("/")
 	  			.permitAll();
 	  			
 
