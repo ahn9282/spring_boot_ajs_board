@@ -18,5 +18,12 @@
 <p>principal: <sec:authentication property="principal"/></p>
 <p>username: <sec:authentication property="principal.username"/></p>
 <p>password: <sec:authentication property="principal.password"/></p>
+<p>deptno: <sec:authentication property="principal.emp.deptno"/></p>
+<p>sal: <sec:authentication property="principal.emp.sal"/></p>
+<p>mgr: <sec:authentication property="principal.emp.mgr"/></p>
+<p>job: <sec:authentication property="principal.emp.job"/></p>
+
+
+
 </body>
 </html>

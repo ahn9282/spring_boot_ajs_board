@@ -43,6 +43,7 @@ td, th {
 }
 </style>
 
+
 </head>
 <body>
 	<div class="container ">
@@ -65,25 +66,28 @@ td, th {
 						<tr>
 							<td>${board.rnum}</td>
 							<td><c:forEach begin="1" end="${board.bindent}">[Re]</c:forEach>
-								<a href="${pageContext.request.contextPath }/board/view?bid=${board.bid}">${board.btitle}</a></td>
+								<a
+								href="${pageContext.request.contextPath }/board/view?bid=${board.bid}">${board.btitle}</a></td>
 							<td>${board.bname}</td>
 							<td style="min-width: 200px;">${board.bdate}</td>
 							<td>${board.bhit}</td>
-							<td><a href="${pageContext.request.contextPath }/board/delete?bid=${board.bid}"
-								class="btn btn-danger" type="submit">삭제</a></td>
+							<td> <button id ="dltbtn" class="btn btn-danger" type="button" onclick="clkbtn(${item.bid})">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</table>
-				<div id="page" class="d-flex flex-row justify-content-center align-items-center">
+				<div id="page"
+					class="d-flex flex-row justify-content-center align-items-center">
 					<nav aria-label="Search results pages">
 						<ul class="pagination">
 
 							<c:if test="${pageMaker.prev}">
-								<li class="page-item"><a id="page-a1" class="page-link" href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">
+								<li class="page-item"><a id="page-a1" class="page-link"
+									href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">
 										<< </a></li>
 							</c:if>
 
-							<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+							<c:forEach var="idx" begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}">
 								<c:if test="${idx == pageMaker.criteria.pageNum }">
 									<li class="page-item active">
 								</c:if>
@@ -96,7 +100,8 @@ td, th {
 
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li class="page-item"><a class="page-link" id="page-a2" href="list2${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+								<li class="page-item"><a class="page-link" id="page-a2"
+									href="list2${pageMaker.makeQuery(pageMaker.endPage + 1) }">
 										>> </a></li>
 							</c:if>
 
@@ -107,12 +112,15 @@ td, th {
 			</div>
 			<div class="card=footer w-100 m-3" id="card-content"
 				style="border-top: 1px solid #aaaaaa;">
-				<form action="${pageContext.request.contextPath }/board/register" method="get">
+				<form action="${pageContext.request.contextPath }/board/register"
+					method="get">
 
 					<button type="submit" class="btn btn-primary mt-3">추가 등록</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	
 </body>
 </html>
