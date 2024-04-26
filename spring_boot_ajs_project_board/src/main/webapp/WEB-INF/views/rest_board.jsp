@@ -6,8 +6,11 @@
 
             <head>
                 <meta charset="UTF-8">
+                
                 <meta name="_csrf" content="${_csrf.token}" />
                 <meta name="_csrf_header" content="${_csrf.headerName}" />
+                <!--  -->
+                
                 <title>게시판</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -18,6 +21,7 @@
 
                     </script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                
             </head>
 
             <body>
@@ -84,6 +88,8 @@
                                 data: { "bid": id },
                                 beforeSend: function (xhr) {
                                     xhr.setRequestHeader(header, token);
+                                    //ajax호출 중 처리
+                                    //글로벌 변수로 설정한 csrf token 셋팅
                                 },
                                 async: true,
                                 success: function (result) {
