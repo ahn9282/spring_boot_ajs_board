@@ -1,7 +1,7 @@
-## Spring Boot 환경에서 수업을 진행하며 공부한 소스코드들입니다.
-환경 : STS 3.9.11 
-기술 : Spring boot, MyBatis, AJAX, Spring Security등등
-내용 : 
+## Spring Boot와 STS3 환경에서 수업을 진행하며 공부한 소스코드들입니다.
+환경 : STS 3.9.11 </tr>
+기술 : Spring boot, MyBatis, AJAX, Spring Security등등</tr>
+내용 :
 1. spring boot 환경에서 MVC게시판
 2. MyBatis를 활용해서  MVC게시판
 3. js와 paging을 통한 동적 MVC게시판
