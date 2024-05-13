@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.sejong.ex.item.ItemMapper">
+
+
+	
+	<insert id="addtoItem" >
+	insert into item (id,itemName, price, quantity) values (mvc_board_seq.nextval,'test',123,455)
+	</insert>
+	<select id="select" resultType="edu.sejong.ex.item.ItemVO" >
+	select * from item
+	</select>
+
+	
+</mapper>
