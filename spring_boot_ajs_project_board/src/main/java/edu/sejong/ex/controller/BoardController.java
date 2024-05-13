@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.sejong.ex.LogTrace.LogTrace;
+import edu.sejong.ex.LogTrace.TraceStatus;
 import edu.sejong.ex.page.Criteria;
 import edu.sejong.ex.service.BoardService;
 import edu.sejong.ex.vo.BoardVO;
@@ -23,20 +25,35 @@ public class BoardController  {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	LogTrace trace;
 
 	@GetMapping("/list")
 	public String boardList(Model model,
 			@RequestParam(value = "startNum", required = false)Integer StartNum, 
 			@RequestParam(value = "endNum", required = false)Integer endNum) {
+		 TraceStatus status = null;
 		
-		if(endNum == null || StartNum == null) {
-			StartNum = 1;
-			endNum = 5;
-		}
-		
-		model.addAttribute("boards",boardService.boardListPage(StartNum,endNum));
-		model.addAttribute("boardsLength",boardService.boardList().size());
-		return"/board/list";
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	            
+	        	if(endNum == null || StartNum == null) {
+	    			StartNum = 1;
+	    			endNum = 5;
+	    		}
+	    		
+	    		model.addAttribute("boards",boardService.boardListPage(StartNum,endNum));
+	    		model.addAttribute("boardsLength",boardService.boardList().size());
+	    		
+	    		trace.end(status);
+	    		
+	    		return"/board/list";
+	    		
+	        } catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
 	}
 	@GetMapping("/list2")
 	public String boardList2(Criteria criteria,Model model) {
@@ -60,38 +77,93 @@ public class BoardController  {
 	
 	@GetMapping("/register")
 	public String boardRegisterView() {
-		return"/board/register";
+		 TraceStatus status = null;
+			
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	    		trace.end(status);
+	    		
+	    		return"/board/register";	    		
+	        } catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
+
 	}
 	
 	@PostMapping("/register")
 	public String boardRegister(BoardVO board,Model model) {
+
 		
-		boardService.registerBoard(board);
 		
-		return"redirect:/board/list";
+		 TraceStatus status = null;
+			
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	            boardService.registerBoard(board);
+	    		trace.end(status);
+	    		
+	    		return"redirect:/board/list";
+	    		} catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
 	}
 	
 	@GetMapping("/delete")
 	public String deleteBoad(BoardVO board,Model model) {
 		
-		boardService.deleteBoard(board);
 		
-		return"redirect:/board/list";
+		
+		 TraceStatus status = null;
+			
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	    		boardService.deleteBoard(board);
+	    		trace.end(status);
+	    		
+	    		return"redirect:/board/list";
+	    		} catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
 		}
 	
 	@GetMapping("/view")
 	public String viewBoad(BoardVO board,Model model) {
 		
-		model.addAttribute("board",boardService.viewBoard(board));
 		
-		return"/board/view";
+		
+		 TraceStatus status = null;
+			
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	            model.addAttribute("board",boardService.viewBoard(board));
+	    		trace.end(status);
+	    		
+	    		return"/board/view";
+	    		} catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
 		}
 	@PostMapping("/modify")
 	public String modifyBoad(BoardVO board,Model model) {
 		
-		boardService.modifyBoard(board);
 		
-		return"redirect:/board/list";
+		
+		 TraceStatus status = null;
+			
+	        try {
+	            status = trace.begin("OrderService.orderItem()");
+	            boardService.modifyBoard(board);
+	    		trace.end(status);
+	    		
+	    		return"redirect:/board/list";
+	    		} catch (Exception e) {
+	            trace.exception(status, e);
+	            throw e;
+	        }
 	}
 	
 	@PostMapping("/reply_register")
